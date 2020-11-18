@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{17BEFF14-0A52-2A73-E5B4-1FB96F3C8E9D}</ProjectGuid>
+    <ProjectGuid>{2B33C5A4-0A62-34DC-BB63-15B7AC1B516C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -57,17 +57,17 @@
   <ItemGroup>
     <Compile Include="Assets\StylizedWaterShader\Code\EnableCameraDepthInForward.cs" />
     <Compile Include="Assets\ToonShader\Assets\Scripts\SimpleCameraController.cs" />
-    <Compile Include="Assets\Scripts\MapDisplay.cs" />
+    <Compile Include="Assets\Scripts\Terrain\MapDisplay.cs" />
     <Compile Include="Assets\StylizedWaterShader\Code\WaterReflection.cs" />
-    <Compile Include="Assets\Scripts\MeshGenerator.cs" />
+    <Compile Include="Assets\Scripts\Terrain\MeshGenerator.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerView.cs" />
-    <Compile Include="Assets\Scripts\TextureGenerator.cs" />
-    <Compile Include="Assets\Scripts\WorldGenerator.cs" />
+    <Compile Include="Assets\Scripts\Terrain\TextureGenerator.cs" />
+    <Compile Include="Assets\Scripts\Terrain\WorldGenerator.cs" />
     <Compile Include="Assets\ToonShader\Scripts\RenderReplacementShaderToTexture.cs" />
-    <Compile Include="Assets\Scripts\Noise.cs" />
+    <Compile Include="Assets\Scripts\Terrain\Noise.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
     <Compile Include="Assets\ToonShader\PostProcessOutline.cs" />
-    <Compile Include="Assets\Vegetation.cs" />
+    <Compile Include="Assets\Scripts\AI\Enemy.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\ToonShader\Assets\CustomLighting.hlsl" />

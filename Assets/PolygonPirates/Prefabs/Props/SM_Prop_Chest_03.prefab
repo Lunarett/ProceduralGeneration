@@ -92,6 +92,7 @@ GameObject:
   - component: {fileID: 452878}
   - component: {fileID: 3349358}
   - component: {fileID: 2386844}
+  - component: {fileID: 8705644255532588732}
   m_Layer: 0
   m_Name: SM_Prop_Chest_03
   m_TagString: Untagged
@@ -108,7 +109,7 @@ Transform:
   m_GameObject: {fileID: 178976}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.79763997, y: 0.79764, z: 0.79763997}
   m_Children:
   - {fileID: 454508}
   - {fileID: 444266}
@@ -164,6 +165,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &8705644255532588732
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 178976}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.6376953, y: 0.22210121, z: 0.43493652}
+  m_Center: {x: 0, y: 0.111050606, z: -0.00012207031}
 --- !u!1 &199440
 GameObject:
   m_ObjectHideFlags: 0

@@ -99,12 +99,12 @@ public class WorldGenerator : MonoBehaviour
 			Vector3 pos = MeshGenerator.ChunkToWorldPos(rndX, rndZ, _chunkSize, noiseMap, _meshHeightMultiplier, _meshHeightCurve);
 			int rndVeg = Random.Range(0, _vegetaion.Length);
 
-			if (pos.y > _vegetaion[rndVeg].minHeight && pos.y < _vegetaion[rndVeg].maxHeight)
+			if (pos.y > _vegetaion[rndVeg].MinHeight && pos.y < _vegetaion[rndVeg].MaxHeight)
 			{
 				Quaternion rndRot = Quaternion.Euler(0, Random.Range(0, 360), 0);
 
 				GameObject obj = Instantiate(_vegetaion[rndVeg].Prefab, Vector3.Scale(pos, transform.lossyScale), rndRot, transform);
-				obj.transform.localScale = new Vector3(1 / transform.lossyScale.x, 1 / transform.lossyScale.y, 1 / transform.lossyScale.z);
+				obj.transform.localScale = new Vector3(1 / transform.lossyScale.x * _vegetaion[rndVeg].SizeMultiplier, 1 / transform.lossyScale.y * _vegetaion[rndVeg].SizeMultiplier, 1 / transform.lossyScale.z * _vegetaion[rndVeg].SizeMultiplier);
 			}
 		}
 
@@ -133,6 +133,7 @@ public class Element
 {
 	public string Name;
 	public GameObject Prefab;
-	public float minHeight;
-	public float maxHeight;
+	public float MinHeight;
+	public float MaxHeight;
+	public float SizeMultiplier;
 }

@@ -44,10 +44,12 @@ public class Enemy : MonoBehaviour
 	{
 		if(_inRange)
 		{
+			Debug.Log(_inRange);
 			_enemyState = States.Chase;
 		}
 		else
 		{
+			Debug.Log(_inRange);
 			_enemyState = States.Idle;
 		}
 	}
@@ -65,10 +67,10 @@ public class Enemy : MonoBehaviour
 
 	private void OnChase()
 	{
-		Debug.Log(_enemyState);
 		_agent.SetDestination(_target.transform.position);
+		Debug.Log(_agent.destination);
 
-		transform.LookAt(_target.transform);
+
 	}
 
 	private void OnTriggerEnter(Collider other)
@@ -78,6 +80,7 @@ public class Enemy : MonoBehaviour
 	}
 	private void OnTriggerExit(Collider other)
 	{
-		_inRange = false;
+		if (other.gameObject.CompareTag("Player"))
+			_inRange = false;
 	}
 }

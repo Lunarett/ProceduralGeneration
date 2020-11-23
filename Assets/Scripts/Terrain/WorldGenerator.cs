@@ -104,7 +104,7 @@ public class WorldGenerator : MonoBehaviour
 				Quaternion rndRot = Quaternion.Euler(0, Random.Range(0, 360), 0);
 
 				GameObject obj = Instantiate(_vegetaion[rndVeg].Prefab, Vector3.Scale(pos, transform.lossyScale), rndRot, transform);
-				obj.transform.localScale = new Vector3(1 / transform.lossyScale.x * _vegetaion[rndVeg].SizeMultiplier, 1 / transform.lossyScale.y * _vegetaion[rndVeg].SizeMultiplier, 1 / transform.lossyScale.z * _vegetaion[rndVeg].SizeMultiplier);
+				obj.transform.localScale = new Vector3(1 / transform.lossyScale.x * Random.Range(_vegetaion[rndVeg].MinScale, _vegetaion[rndVeg].MaxScale), 1 / transform.lossyScale.y * Random.Range(_vegetaion[rndVeg].MinScale, _vegetaion[rndVeg].MaxScale), 1 / transform.lossyScale.z * Random.Range(_vegetaion[rndVeg].MinScale, _vegetaion[rndVeg].MaxScale));
 			}
 		}
 
@@ -135,5 +135,7 @@ public class Element
 	public GameObject Prefab;
 	public float MinHeight;
 	public float MaxHeight;
-	public float SizeMultiplier;
+
+	public float MinScale;
+	public float MaxScale;
 }

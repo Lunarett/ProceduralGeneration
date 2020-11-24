@@ -4,53 +4,58 @@ using UnityEngine;
 
 public class PlayerView : MonoBehaviour
 {
-	[SerializeField] private Transform _player;
-	[SerializeField] private Transform _playerArms;
+	[SerializeField] private string mouseXInputName, mouseYInputName;
+	[SerializeField] private float mouseSensitivity;
 
-	[SerializeField] private float _mouseSensitivity;
+	[SerializeField] private Transform playerBody;
 
-	private float _xAxisClamp = 0;
+	private float xAxisClamp;
 
 	private void Awake()
+	{
+		LockCursor();
+		xAxisClamp = 0.0f;
+	}
+
+
+	private void LockCursor()
 	{
 		Cursor.lockState = CursorLockMode.Locked;
 	}
 
 	private void Update()
 	{
-		RotateCamera();
+		CameraRotation();
 	}
 
-	private void RotateCamera()
+	private void CameraRotation()
 	{
-		float mouseX = Input.GetAxis("Mouse X");
-		float mouseY = Input.GetAxis("Mouse Y");
+		float mouseX = Input.GetAxis(mouseXInputName) * mouseSensitivity * Time.deltaTime;
+		float mouseY = Input.GetAxis(mouseYInputName) * mouseSensitivity * Time.deltaTime;
 
-		float rotAmountX = mouseX * _mouseSensitivity;
-		float rotAmountY = mouseY * _mouseSensitivity;
+		xAxisClamp += mouseY;
 
-		_xAxisClamp -= rotAmountY;
-
-		Vector3 rotPlayerArms = _playerArms.transform.rotation.eulerAngles;
-		Vector3 rotPlayer = _player.transform.rotation.eulerAngles;
-
-		rotPlayerArms.x -= rotAmountY;
-		rotPlayerArms.z = 0;
-		rotPlayer.y += rotAmountX;
-
-		if (_xAxisClamp > 90)
+		if (xAxisClamp > 90.0f)
 		{
-			_xAxisClamp = 90;
-			rotPlayerArms.x = 90;
+			xAxisClamp = 90.0f;
+			mouseY = 0.0f;
+			ClampXAxisRotationToValue(270.0f);
+		}
+		else if (xAxisClamp < -90.0f)
+		{
+			xAxisClamp = -90.0f;
+			mouseY = 0.0f;
+			ClampXAxisRotationToValue(90.0f);
 		}
 
-		else if (_xAxisClamp < -90)
-		{
-			_xAxisClamp = -90;
-			rotPlayerArms.x = 270;
-		}
+		transform.Rotate(Vector3.left * mouseY);
+		playerBody.Rotate(Vector3.up * mouseX);
+	}
 
-		_playerArms.rotation = Quaternion.Euler(rotPlayerArms);
-		_player.rotation = Quaternion.Euler(rotPlayer);
+	private void ClampXAxisRotationToValue(float value)
+	{
+		Vector3 eulerRotation = transform.eulerAngles;
+		eulerRotation.x = value;
+		transform.eulerAngles = eulerRotation;
 	}
 }

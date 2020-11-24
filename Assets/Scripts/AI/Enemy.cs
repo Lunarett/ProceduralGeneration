@@ -44,19 +44,16 @@ public class Enemy : MonoBehaviour
 	{
 		if(_inRange)
 		{
-			Debug.Log(_inRange);
 			_enemyState = States.Chase;
 		}
 		else
 		{
-			Debug.Log(_inRange);
 			_enemyState = States.Idle;
 		}
 	}
 
 	private void OnIdle()
 	{
-		Debug.Log(_enemyState);
 		_agent.SetDestination(transform.position);
 
 		/*
@@ -68,19 +65,22 @@ public class Enemy : MonoBehaviour
 	private void OnChase()
 	{
 		_agent.SetDestination(_target.transform.position);
-		Debug.Log(_agent.destination);
-
-
 	}
 
 	private void OnTriggerEnter(Collider other)
 	{
 		if (other.gameObject.CompareTag("Player"))
+		{
+			_target = other.gameObject;
 			_inRange = true;
+		}
 	}
 	private void OnTriggerExit(Collider other)
 	{
 		if (other.gameObject.CompareTag("Player"))
+		{
+			_target = other.gameObject;
 			_inRange = false;
+		}
 	}
 }

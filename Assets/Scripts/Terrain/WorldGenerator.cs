@@ -25,8 +25,9 @@ public class WorldGenerator : MonoBehaviour
 	[SerializeField] private int _seed;
 	[SerializeField] private Vector2 _offset;
 
-	[Header("Vegetation Spawner")]
+	[Header("Object Spawner")]
 	[SerializeField] private int _densitiy;
+	[SerializeField] private GameObject _player;
 	[SerializeField] private Element[] _vegetaion;
 
 	public bool AutoUpdate = true;
@@ -90,6 +91,7 @@ public class WorldGenerator : MonoBehaviour
 	private void SpawnVegetation(float[,] noiseMap, int treeAmount)
 	{
 		DestroyAllChildren();
+		bool doOnce = true;
 
 		for (int i = 0; i < treeAmount; i++)
 		{
@@ -98,6 +100,13 @@ public class WorldGenerator : MonoBehaviour
 
 			Vector3 pos = MeshGenerator.ChunkToWorldPos(rndX, rndZ, _chunkSize, noiseMap, _meshHeightMultiplier, _meshHeightCurve);
 			int rndVeg = Random.Range(0, _vegetaion.Length);
+
+			//Spawn Player
+			if (doOnce && pos.y > 6.5f && pos.y < 10)
+			{
+				Instantiate(_player, Vector3.Scale(pos, transform.lossyScale), Quaternion.Euler(0, Random.Range(0, 360), 0), transform);
+				doOnce = false;
+			}
 
 			if (pos.y > _vegetaion[rndVeg].MinHeight && pos.y < _vegetaion[rndVeg].MaxHeight)
 			{

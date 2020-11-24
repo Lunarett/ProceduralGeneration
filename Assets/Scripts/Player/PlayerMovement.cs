@@ -4,56 +4,66 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-	private CharacterController _controller;
+	[SerializeField] private string horizontalInputName;
+	[SerializeField] private string verticalInputName;
+	[SerializeField] private float movementSpeed;
 
-	private Vector3 _moveDirection;
+	private CharacterController charController;
 
-	[SerializeField] private float _jumpSpeed = 30;
-	[SerializeField] private float _gravity = 2;
-	
-	private float _moveSpeed;
-	private float _walkSpeed = 4;
-	private float _sprintSpeed = 6;
+	[SerializeField] private AnimationCurve jumpFallOff;
+	[SerializeField] private float jumpMultiplier;
+	[SerializeField] private KeyCode jumpKey;
 
-	private void Start()
+
+	private bool isJumping;
+
+	private void Awake()
 	{
-		_controller = GetComponent<CharacterController>();
+		charController = GetComponent<CharacterController>();
 	}
 
 	private void Update()
 	{
-		Move();
+		PlayerMove();
 	}
 
-	private void Move()
+	private void PlayerMove()
 	{
-		float moveX = Input.GetAxis("Horizontal");
-		float moveZ = Input.GetAxis("Vertical");
+		float horizInput = Input.GetAxis(horizontalInputName) * movementSpeed;
+		float vertInput = Input.GetAxis(verticalInputName) * movementSpeed;
 
-		if (_controller.isGrounded)
+		Vector3 forwardMovement = transform.forward * vertInput;
+		Vector3 rightMovement = transform.right * horizInput;
+
+		charController.SimpleMove(forwardMovement + rightMovement);
+
+		JumpInput();
+
+	}
+
+	private void JumpInput()
+	{
+		if (Input.GetKeyDown(jumpKey) && !isJumping)
 		{
-			_moveDirection = new Vector3(moveX, 0, moveZ);
-			_moveDirection = transform.TransformDirection(_moveDirection);
-
-			if (Input.GetKey(KeyCode.LeftShift) && moveZ == 1)
-			{
-				_moveSpeed = _sprintSpeed;
-			}
-
-			else
-			{
-				_moveSpeed = _walkSpeed;
-			}
-
-			_moveDirection *= _moveSpeed;
-
-			if (Input.GetKeyDown(KeyCode.Space))
-			{
-				_moveDirection.y += _jumpSpeed;
-			}
+			isJumping = true;
+			StartCoroutine(JumpEvent());
 		}
+	}
 
-		_moveDirection.y -= _gravity;
-		_controller.Move(_moveDirection * Time.deltaTime);
+	private IEnumerator JumpEvent()
+	{
+		charController.slopeLimit = 90.0f;
+		float timeInAir = 0.0f;
+
+		do
+		{
+			float jumpForce = jumpFallOff.Evaluate(timeInAir);
+			charController.Move(Vector3.up * jumpForce * jumpMultiplier * Time.deltaTime);
+			timeInAir += Time.deltaTime;
+			yield return null;
+		} while (!charController.isGrounded && charController.collisionFlags != CollisionFlags.Above);
+
+		charController.slopeLimit = 45.0f;
+		isJumping = false;
 	}
 }

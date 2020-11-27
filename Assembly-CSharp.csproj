@@ -55,55 +55,49 @@
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio Tools for Unity\16.0\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\StylizedWaterShader\Code\EnableCameraDepthInForward.cs" />
-    <Compile Include="Assets\ToonShader\Assets\Scripts\SimpleCameraController.cs" />
+    <Compile Include="Assets\ImportedAssets\StylizedWaterShader\Code\EnableCameraDepthInForward.cs" />
+    <Compile Include="Assets\Scripts\UI\MainMenu.cs" />
+    <Compile Include="Assets\Scripts\Environment\OpenDoor.cs" />
     <Compile Include="Assets\Scripts\AI\Enemy.cs" />
-    <Compile Include="Assets\Scripts\Terrain\MapDisplay.cs" />
-    <Compile Include="Assets\StylizedWaterShader\Code\WaterReflection.cs" />
+    <Compile Include="Assets\Scripts\Terrain\WorldDisplay.cs" />
+    <Compile Include="Assets\Scripts\UI\MenuCamRotate.cs" />
+    <Compile Include="Assets\ImportedAssets\StylizedWaterShader\Code\WaterReflection.cs" />
+    <Compile Include="Assets\Scripts\Environment\PressurePlate.cs" />
     <Compile Include="Assets\Scripts\Terrain\MeshGenerator.cs" />
-    <Compile Include="Assets\Scripts\Player\PlayerView.cs" />
+    <Compile Include="Assets\ImportedAssets\FirstPersion AIO Pack\FirstPersonAIO\FirstPersonAIO.cs" />
     <Compile Include="Assets\Scripts\Terrain\TextureGenerator.cs" />
     <Compile Include="Assets\Scripts\Terrain\WorldGenerator.cs" />
-    <Compile Include="Assets\ToonShader\Scripts\RenderReplacementShaderToTexture.cs" />
     <Compile Include="Assets\Scripts\Terrain\Noise.cs" />
-    <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
-    <Compile Include="Assets\ToonShader\PostProcessOutline.cs" />
-    <Compile Include="Assets\OpenDoor.cs" />
-    <Compile Include="Assets\RemoveObjectsNearby.cs" />
-    <Compile Include="Assets\Scripts\Player\PlayerController.cs" />
-    <Compile Include="Assets\PressurePlate.cs" />
+    <Compile Include="Assets\Scripts\UI\PauseMenu.cs" />
   </ItemGroup>
   <ItemGroup>
-     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
-     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
-     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
-     <None Include="Assets\ToonShader\Assets\CustomLighting.hlsl" />
-     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
-     <None Include="Assets\ToonShader\Outline.shader" />
-     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
-     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
-     <None Include="Assets\ToonShader\Shaders\HiddenNormalsTexture.shader" />
-     <None Include="Assets\StylizedWaterShader\Example\Materials\foliage.shader" />
-     <None Include="Assets\StylizedWaterShader\MobileVersion\Shader\StylizedWaterMobile.shader" />
-     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
-     <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
-     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
-     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF.shader" />
-     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile SSD.shader" />
-     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
-     <None Include="Assets\StylizedWaterShader\MobileVersion\README.txt" />
-     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
-     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
-     <None Include="Assets\StylizedWaterShader\Shaders\StylizedWater.shader" />
-     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
-     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
-     <None Include="Assets\StylizedWaterShader\Shaders\VFXWater.shader" />
-     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
-     <None Include="Assets\StylizedWaterShader\VFX\VFXResources\VFXWater.shader" />
-     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />
-     <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
-     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile.shader" />
-     <None Include="Assets\TextMesh Pro\Shaders\TMP_Sprite.shader" />
+     <None Include="Assets\UI\TextMesh Pro\Shaders\TMPro.cginc" />
+     <None Include="Assets\UI\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
+     <None Include="Assets\UI\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
+     <None Include="Assets\UI\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
+     <None Include="Assets\UI\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
+     <None Include="Assets\UI\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
+     <None Include="Assets\ImportedAssets\StylizedWaterShader\Example\Materials\foliage.shader" />
+     <None Include="Assets\ImportedAssets\StylizedWaterShader\MobileVersion\Shader\StylizedWaterMobile.shader" />
+     <None Include="Assets\UI\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
+     <None Include="Assets\UI\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
+     <None Include="Assets\UI\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
+     <None Include="Assets\UI\TextMesh Pro\Shaders\TMP_SDF.shader" />
+     <None Include="Assets\UI\TextMesh Pro\Shaders\TMP_SDF-Mobile SSD.shader" />
+     <None Include="Assets\UI\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
+     <None Include="Assets\ImportedAssets\StylizedWaterShader\MobileVersion\README.txt" />
+     <None Include="Assets\UI\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
+     <None Include="Assets\UI\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
+     <None Include="Assets\ImportedAssets\StylizedWaterShader\Shaders\StylizedWater.shader" />
+     <None Include="Assets\UI\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
+     <None Include="Assets\UI\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
+     <None Include="Assets\ImportedAssets\StylizedWaterShader\Shaders\VFXWater.shader" />
+     <None Include="Assets\UI\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
+     <None Include="Assets\ImportedAssets\StylizedWaterShader\VFX\VFXResources\VFXWater.shader" />
+     <None Include="Assets\UI\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />
+     <None Include="Assets\UI\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
+     <None Include="Assets\UI\TextMesh Pro\Shaders\TMP_SDF-Mobile.shader" />
+     <None Include="Assets\UI\TextMesh Pro\Shaders\TMP_Sprite.shader" />
     <Reference Include="UnityEngine">
       <HintPath>C:\Program Files (x86)\UnityEditor\2020.1.6f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>
@@ -703,6 +697,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="NavMeshComponentsEditor.csproj">
+      <Project>{83D60349-F942-4157-1FB4-0666A36073E4}</Project>
+      <Name>NavMeshComponentsEditor</Name>
+    </ProjectReference>
+    <ProjectReference Include="NavMeshComponents.csproj">
+      <Project>{477FDE46-24D9-DD7C-0B15-10A811B94CD5}</Project>
+      <Name>NavMeshComponents</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

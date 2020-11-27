@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class WorldGenerator : MonoBehaviour
 {
@@ -34,13 +35,29 @@ public class WorldGenerator : MonoBehaviour
 	public bool RandomizeOnStart = false;
 
 	public TerrainType[] regions;
+	private NavMeshSurface _navMeshSurface;
+
+	private void Awake()
+	{
+		_navMeshSurface = GetComponent<NavMeshSurface>();
+	}
 
 	private void Start()
 	{
-		if(RandomizeOnStart)
+		if (RandomizeOnStart)
 			_seed = Random.Range(1, int.MaxValue);
 
 		GenerateWorld();
+
+		if (_navMeshSurface != null)
+			_navMeshSurface.BuildNavMesh();
+
+		var turnOnNavAgent = GameObject.FindObjectsOfType<NavMeshAgent>(true);
+
+		for (int i = 0; i < turnOnNavAgent.Length; i++)
+		{
+			turnOnNavAgent[i].enabled = true;
+		}
 	}
 
 	public void GenerateWorld()
@@ -66,7 +83,7 @@ public class WorldGenerator : MonoBehaviour
 			}
 		}
 
-		MapDisplay display = FindObjectOfType<MapDisplay>();
+		WorldDisplay display = FindObjectOfType<WorldDisplay>();
 
 		if (drawMode == DrawMode.NoiseMap)
 			display.DrawTexture(TextureGenerator.TextureFromHeightMap(noiseMap));
@@ -76,7 +93,7 @@ public class WorldGenerator : MonoBehaviour
 			display.DrawMesh(MeshGenerator.GenerateTerrainMesh(noiseMap, _meshHeightMultiplier, _meshHeightCurve, _LevelOfDetail, _useTerrainFlatShading), TextureGenerator.TextureFromColorMap(colorMap, _chunkSize, _chunkSize));
 
 
-		SpawnVegetation(noiseMap, _densitiy);
+		SpawnObjects(noiseMap, _densitiy);
 	}
 
 	private void OnValidate()
@@ -88,15 +105,28 @@ public class WorldGenerator : MonoBehaviour
 			_octaves = 0;
 	}
 
-	private void SpawnVegetation(float[,] noiseMap, int treeAmount)
+	private void SpawnObjects(float[,] noiseMap, int treeAmount)
 	{
 		DestroyAllChildren();
 		bool doOnce = true;
+		bool[,] occupiedMap = new bool[_chunkSize, _chunkSize];
 
 		for (int i = 0; i < treeAmount; i++)
 		{
-			int rndX = Random.Range(0, _chunkSize);
-			int rndZ = Random.Range(0, _chunkSize);
+			int ocX = Random.Range(0, _chunkSize);
+			int ocY = Random.Range(0, _chunkSize);
+
+			if (occupiedMap[ocX, ocY])
+			{
+				i--;
+				continue;
+			}
+
+			occupiedMap[ocX, ocY] = true;
+
+			int rndX = ocX;
+			int rndZ = ocY;
+
 
 			Vector3 pos = MeshGenerator.ChunkToWorldPos(rndX, rndZ, _chunkSize, noiseMap, _meshHeightMultiplier, _meshHeightCurve);
 			int rndVeg = Random.Range(0, _vegetaion.Length);

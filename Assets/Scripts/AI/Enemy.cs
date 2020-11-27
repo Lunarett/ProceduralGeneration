@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
@@ -10,17 +11,23 @@ public class Enemy : MonoBehaviour
 		Chase
 	};
 
-	[SerializeField] private States _enemyState;
-	[SerializeField] private GameObject _target;
+	
+	[SerializeField] private Transform[] _waypoints;
 
+	private GameObject _target;
 	private bool _inRange;
+	private Transform _currentWaypoint;
 	private NavMeshAgent _agent;
+	private States _enemyState;
+	private Animator _animator;
+	private int index = 0;
 
 
 
 	private void Awake()
 	{
 		_agent = GetComponent<NavMeshAgent>();
+		_animator = GetComponent<Animator>();
 	}
 
 	private void Update()
@@ -30,7 +37,7 @@ public class Enemy : MonoBehaviour
 		switch (_enemyState)
 		{
 			case States.Idle:
-				OnIdle();
+				OnPatrol();
 				break;
 			case States.Chase:
 				OnChase();
@@ -38,6 +45,10 @@ public class Enemy : MonoBehaviour
 			default:
 				break;
 		}
+
+		float y = Vector3.Dot(transform.forward, _agent.velocity);
+
+		_animator.SetFloat("speed", y / 4);
 	}
 
 	private void SetSate()
@@ -52,14 +63,22 @@ public class Enemy : MonoBehaviour
 		}
 	}
 
-	private void OnIdle()
+	private void OnPatrol()
 	{
-		_agent.SetDestination(transform.position);
+		if (_agent.pathPending)
+			return;
 
-		/*
-		 * Ai should go from waypoint 1 to waypoint 2 in the building
-		 * needs sight detection
-		 */
+		if(_agent.remainingDistance < 1)
+		{
+			index++;
+
+			if (index >= _waypoints.Length)
+			{
+				index = 0;
+			}
+		}
+
+		_agent.SetDestination(_waypoints[index].position);
 	}
 
 	private void OnChase()
